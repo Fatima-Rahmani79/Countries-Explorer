@@ -47,8 +47,141 @@ h1 {
     font-weight: bold;
     text-shadow: 1px 1px 4px rgb(255, 252, 252);
 }
+
 h3 {
     font-size: 1.5rem;
     font-weight: normal;
     text-shadow: 1px 1px 4px rgb(255, 252, 252);
+}
+
+.SearchFilterContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.306);
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    width: 300px;
+    border: 1px solid #858585;
+    border-radius: 8px;
+    gap: 4px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.283);
+}
+
+.search span {
+    padding-top: 2px;
+}
+
+.search_input {
+    border: none;
+    background-color: inherit;
+}
+
+.search_input:focus {
+    outline: none;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-select {
+    padding: 6px;
+    border: 1px solid #858585;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.283);
+}
+
+.filter-select:focus {
+    outline: none;
+}
+
+.filter-select option {
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.countries-grid {
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+.country-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.country-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.country-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.country-card {
+  animation: fadeUp 0.4s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+    .SearchFilterContainer {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .search {
+        width: 100%;
+    }
 }
