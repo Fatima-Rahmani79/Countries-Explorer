@@ -47,7 +47,6 @@ function App() {
         }
         const data = await res.json();
         setCountries(data);
-        
       } catch (err) {
         if (err.name === "AbortError") return;
 
@@ -89,6 +88,15 @@ function App() {
             setSearch("");
           }}
         />
+
+        <button className="btn"
+          onClick={() => {
+            setSearch("");
+            setRegion("all");
+          }}
+        >
+          Clear Filters
+        </button>
       </section>
 
       {loading && <CountriesSkeletonGrid />}

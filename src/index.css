@@ -115,6 +115,16 @@ h3 {
     cursor: pointer;
 }
 
+.btn {
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.283);
+}
+
 .countries-grid {
     display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -208,7 +218,7 @@ h3 {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .SearchFilterContainer {
         flex-direction: column;
         gap: 15px;
