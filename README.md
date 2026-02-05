@@ -38,7 +38,7 @@ https://restcountries.com/v3.1/region/{region}?fields=name,flags,region,populati
 ![Home Page](screenshots/home.png)
 
 ### Search / Filter Results
-![Results Page](screenshots/results.png)
+![Results Page](screenshots/result.png)
 
 
 ✨ Features
