@@ -52,10 +52,8 @@ Debounced search (500ms delay)
 
 Error handling with retry
 
-Custom “No results found” UI
-
 Responsive design
 
 👩‍💻 Author
 Fatima Rahmani
-GitHub: [Fatima-Rahmani79](https://github.com/Fatima-Rahmani79)
+GitHub: (https://github.com/Fatima-Rahmani79)
