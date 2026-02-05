@@ -9,60 +9,71 @@ import CountriesSkeletonGrid from "./components/CountriesSkeletonGrid";
 
 function App() {
   const [countries, setCountries] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("all");
+  const [retryCount, setRetryCount] = useState(0);
 
   const debouncedSearch = Debounce(search, 500);
 
-
   useEffect(() => {
-  const controller = new AbortController();
+    const controller = new AbortController();
 
-  const fetchCountries = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+    const fetchCountries = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      const fields = "fields=name,flags,region,population,cca3";
-      let url = `https://restcountries.com/v3.1/all?${fields}`;
+        const fields = "fields=name,flags,region,population,cca3";
+        let url = `https://restcountries.com/v3.1/all?${fields}`;
 
-      if (debouncedSearch.trim() !== "") {
-        url = `https://restcountries.com/v3.1/name/${encodeURIComponent(
-          debouncedSearch
-        )}?${fields}`;
-      } else if (region !== "all") {
-        url = `https://restcountries.com/v3.1/region/${region}?${fields}`;
-      }
+        if (debouncedSearch.trim() !== "") {
+          url = `https://restcountries.com/v3.1/name/${encodeURIComponent(
+            debouncedSearch,
+          )}?${fields}`;
+        } else if (region !== "all") {
+          url = `https://restcountries.com/v3.1/region/${region}?${fields}`;
+        }
 
-      const res = await fetch(url, { signal: controller.signal });
-      if (!res.ok) throw new Error();
+        const res = await fetch(url, { signal: controller.signal });
 
-      const data = await res.json();
-      setCountries(data);
-    } catch (err) {
-      if (err.name !== "AbortError") {
-        setError("No country found");
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error("NOT_FOUND");
+          } else {
+            throw new Error("GENERIC_ERROR");
+          }
+        }
+        const data = await res.json();
+        setCountries(data);
+        
+      } catch (err) {
+        if (err.name === "AbortError") return;
+
+        if (err.message === "NOT_FOUND") {
+          setError("No country found.");
+        } else {
+          setError("Something went wrong. Check your connection.");
+        }
+
         setCountries([]);
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchCountries();
-  return () => controller.abort();
-}, [debouncedSearch, region]);
-
+    fetchCountries();
+    return () => controller.abort();
+  }, [debouncedSearch, region, retryCount]);
 
   const getCountryName = (c) => c?.name?.common ?? c?.name ?? "";
 
   const filteredCountries =
     !countries || search.trim() === ""
-      ? countries ?? [] 
+      ? (countries ?? [])
       : countries.filter((country) =>
-          getCountryName(country).toLowerCase().includes(search.toLowerCase())
+          getCountryName(country).toLowerCase().includes(search.toLowerCase()),
         );
 
   return (
@@ -82,7 +93,12 @@ function App() {
 
       {loading && <CountriesSkeletonGrid />}
 
-      {error && <p>{error}</p>}
+      {error && !loading && (
+        <div className="error-box">
+          <p>Error: {error}</p>
+          <button onClick={() => setRetryCount((c) => c + 1)}>Retry</button>
+        </div>
+      )}
 
       {!loading && !error && countries && countries.length > 0 && (
         <CountriesGrid countries={filteredCountries} />

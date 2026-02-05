@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #e8e8e8;
     color: #333;
     line-height: 1.6;
 }
@@ -70,7 +70,7 @@ h3 {
     display: flex;
     align-items: center;
     padding: 4px;
-    width: 300px;
+    width: 40%;
     border: 1px solid #858585;
     border-radius: 8px;
     gap: 4px;
@@ -94,6 +94,7 @@ h3 {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-right: 10px;
 }
 
 .filter-select {
@@ -124,14 +125,14 @@ h3 {
   background-color: #ffffff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 2px 8px 24px rgba(0, 0, 0, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
 }
 
 .country-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.826);
 }
 
 .country-card img {
@@ -141,7 +142,7 @@ h3 {
   display: block;
 }
 
-.card-content {
+.country-card__info {
   padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
@@ -164,6 +165,37 @@ h3 {
 .country-card {
   animation: fadeUp 0.4s ease forwards;
 }
+
+.error-box {
+  margin: 40px auto;
+  padding: 24px;
+  max-width: 420px;
+  text-align: center;
+  border-radius: 10px;
+  background: #fff5f5;
+  border: 1px solid #ffd6d6;
+}
+
+.error-box p {
+  color: #c53030;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.error-box button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #c53030;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error-box button:hover {
+  background: #9b2c2c;
+}
+
 
 @keyframes fadeUp {
   from {
