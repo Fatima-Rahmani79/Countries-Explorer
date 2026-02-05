@@ -9,7 +9,7 @@ A React application that allows users to explore countries, filter by region, an
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Fatima-Rahmani79/countries-app.git
+git clone https://github.com/Fatima-Rahmani79/Countries-Explorer.git
 Navigate to the project folder:
 
 cd countries-app
