@@ -6,56 +6,60 @@ import Filter from "./components/Filter";
 import CountriesGrid from "./components/CountriesGrid";
 
 function App() {
-  const [countries, setCountries] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [countries, setCountries] = useState(null);
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("all");
 
   useEffect(() => {
-  const controller = new AbortController();
+    const controller = new AbortController();
+    const fetchCountries = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-  const fetchCountries = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+        const fields = "fields=name,flags,region,population,cca3";
+        let url = `https://restcountries.com/v3.1/all?${fields}`;
 
-      let url = "https://restcountries.com/v3.1/all";
+        if (search.trim() !== "") {
+          url = `https://restcountries.com/v3.1/name/${encodeURIComponent(
+            search
+          )}?${fields}`;
+        } else if (region !== "all") {
+          url = `https://restcountries.com/v3.1/region/${encodeURIComponent(
+            region
+          )}?${fields}`;
+        }
 
-      if (search.trim() !== "") {
-        url = `https://restcountries.com/v3.1/name/${search}`;
-      } else if (region !== "all") {
-        url = `https://restcountries.com/v3.1/region/${region}`;
+        const res = await fetch(url, { signal: controller.signal });
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        setCountries(Array.isArray(data) ? data : []);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError("No country found");
+          setCountries([]); 
+        }
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const res = await fetch(url, { signal: controller.signal });
-      // console.log(res);
-      if (!res.ok) throw new Error();
+    fetchCountries();
+    return () => controller.abort();
+  }, [search, region]);
 
-      const data = await res.json();
-      setCountries(data);
-    } catch (err) {
-      if (err.name !== "AbortError") {
-        setError("No country found");
-        setCountries([]);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const getCountryName = (c) => c?.name?.common ?? c?.name ?? "";
 
-  fetchCountries();
-  return () => controller.abort();
-}, [search, region]);
-
-
-
-  // serch logic
   const filteredCountries =
-    search.trim() === ""
-      ? countries
+    !countries || search.trim() === ""
+      ? countries ?? [] 
       : countries.filter((country) =>
-          country.name?.common?.toLowerCase().includes(search.toLowerCase()),
+          getCountryName(country).toLowerCase().includes(search.toLowerCase())
         );
 
   return (
@@ -74,16 +78,15 @@ function App() {
       </section>
 
       {loading && <p>Loading Countries...</p>}
-{error && <p>{error}</p>}
+      {error && <p>{error}</p>}
 
-{!loading && !error && countries.length > 0 && (
-  <CountriesGrid countries={filteredCountries} />
-)}
+      {!loading && !error && countries && countries.length > 0 && (
+        <CountriesGrid countries={filteredCountries} />
+      )}
 
-{!loading && !error && countries.length === 0 && (
-  <p>No country found 😕</p>
-)}
-
+      {!loading && !error && countries && countries.length === 0 && (
+        <p>No country found 😕</p>
+      )}
     </>
   );
 }
