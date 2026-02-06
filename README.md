@@ -5,21 +5,14 @@ A React application that allows users to explore countries, filter by region, an
 ---
 
 ## 🚀 How to Run
-
-1. Clone the repository:
-
 ```bash
-git clone https://github.com/Fatima-Rahmani79/countries-app.git
-Navigate to the project folder:
-
-cd countries-app
-Install dependencies:
-
+git clone https://github.com/Fatima-Rahmani79/Countries-Explorer.git
+cd Countries-Explorer
 npm install
-Run the development server:
-
 npm run dev
-Open the app in your browser at http://localhost:5173 (default Vite port).
+
+Open the app in your browser at:
+http://localhost:5173 
 
 🌐 API Endpoints Used
 The app fetches country data from the REST Countries API:
@@ -33,6 +26,7 @@ https://restcountries.com/v3.1/name/{name}?fields=name,flags,region,population,c
 Filter by region:
 https://restcountries.com/v3.1/region/{region}?fields=name,flags,region,population,cca3
 
+
 🖼 Screenshots
 ### Home Page
 ![Home Page](screenshots/home.png)
@@ -43,17 +37,19 @@ https://restcountries.com/v3.1/region/{region}?fields=name,flags,region,populati
 
 ✨ Features
 Search countries by name
-
 Filter countries by region
-
 Skeleton loading UI
-
 Debounced search (500ms delay)
+Error handling with retry option
+Fully responsive design
 
-Error handling with retry
-
-Responsive design
+🛠 Tech Stack
+React
+Vite
+JavaScript (ES6+)
+CSS
+REST Countries API
 
 👩‍💻 Author
 Fatima Rahmani
-GitHub: (https://github.com/Fatima-Rahmani79)
+GitHub: https://github.com/Fatima-Rahmani79
