@@ -7,7 +7,7 @@ A React application that allows users to explore countries, filter by region, an
 ## 🚀 How to Run
 ```bash
 git clone https://github.com/Fatima-Rahmani79/Countries-Explorer.git
-cd Countries-Explorer
+cd countries-explorer
 npm install
 npm run dev
 
