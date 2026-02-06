@@ -26,13 +26,14 @@ https://restcountries.com/v3.1/name/{name}?fields=name,flags,region,population,c
 Filter by region:
 https://restcountries.com/v3.1/region/{region}?fields=name,flags,region,population,cca3
 
-
 🖼 Screenshots
 ### Home Page
-![Home Page](screenshots/home.png)
+### Home Page
+![Home Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/home.png)
 
 ### Search / Filter Results
-![Results Page](screenshots/result.png)
+![Results Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/result.png)
+
 
 
 ✨ Features
