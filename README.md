@@ -29,10 +29,10 @@ https://restcountries.com/v3.1/region/{region}?fields=name,flags,region,populati
 🖼 Screenshots
 ### Home Page
 ### Home Page
-![Home Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/home.png)
+![Home Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/home.png?raw=true)
 
 ### Search / Filter Results
-![Results Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/result.png)
+![Results Page](https://raw.githubusercontent.com/Fatima-Rahmani79/Countries-Explorer/main/screenshots/result.png?raw=true)
 
 
 
